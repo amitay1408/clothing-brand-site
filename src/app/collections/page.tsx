@@ -3,6 +3,8 @@
 import { useRef } from "react";
 import Link from "next/link";
 import BrandImage from "@/components/BrandImage";
+import Container from "@/components/Container";
+import { IMG } from "@/lib/images";
 import { motion, useInView, useScroll, useTransform } from "framer-motion";
 
 function Reveal({ children, className = "" }: { children: React.ReactNode; className?: string }) {
@@ -32,7 +34,7 @@ export default function CollectionsPage() {
       <section ref={heroRef} className="relative h-[70vh] min-h-[480px] max-h-[900px] overflow-hidden">
         <motion.div className="absolute inset-0 w-full h-full" style={{ y: heroY }}>
           <BrandImage
-            src="/images/editorial-pier.jpg"
+            src={IMG.editorialPier}
             alt="Collections hero — Mediterranean dock"
             fill
             priority
@@ -84,7 +86,7 @@ export default function CollectionsPage() {
           <Reveal>
             <div className="relative w-full aspect-[3/4] overflow-hidden">
               <BrandImage
-                src="/images/hero-coastal.jpg"
+                src={IMG.heroCoastal}
                 alt="Collection 01 — The Adriatic"
                 fill
                 className="object-cover object-center transition-transform duration-[1400ms] ease-out hover:scale-[1.04]"
@@ -126,7 +128,7 @@ export default function CollectionsPage() {
       {/* Fabric quote banner */}
       <div className="relative w-full h-56 md:h-72 overflow-hidden">
         <BrandImage
-          src="/images/fabric-texture.jpg"
+          src={IMG.fabricTexture}
           alt="Fabric detail"
           fill
           className="object-cover object-center"
@@ -151,7 +153,7 @@ export default function CollectionsPage() {
           <Reveal className="md:order-2">
             <div className="relative w-full aspect-[3/4] overflow-hidden">
               <BrandImage
-                src="/images/vintage-family.jpg"
+                src={IMG.vintageFamily}
                 alt="Collection 02 — Archive"
                 fill
                 className="object-cover object-center transition-transform duration-[1400ms] ease-out hover:scale-[1.04]"

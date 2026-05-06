@@ -2,6 +2,8 @@
 
 import { useRef } from "react";
 import BrandImage from "@/components/BrandImage";
+import Container from "@/components/Container";
+import { IMG } from "@/lib/images";
 import Link from "next/link";
 import { motion, useInView, useScroll, useTransform } from "framer-motion";
 
@@ -32,7 +34,7 @@ export default function AboutPage() {
       <section ref={heroRef} className="relative h-[72vh] min-h-[480px] max-h-[900px] overflow-hidden">
         <motion.div className="absolute inset-0 w-full h-full" style={{ y: heroY }}>
           <BrandImage
-            src="/images/vintage-family.jpg"
+            src={IMG.vintageFamily}
             alt="Brand archival photography"
             fill
             priority
@@ -99,7 +101,7 @@ export default function AboutPage() {
             <div>
               <div className="relative w-full aspect-[4/5] overflow-hidden mb-4">
                 <BrandImage
-                  src="/images/vintage-family.jpg"
+                  src={IMG.vintageFamily}
                   alt="Archival inspiration — 1979"
                   fill
                   className="object-cover object-center brightness-90"
@@ -162,7 +164,7 @@ export default function AboutPage() {
           <Reveal className="md:row-span-2">
             <div className="relative w-full aspect-[3/4] md:h-full overflow-hidden" style={{ minHeight: "320px" }}>
               <BrandImage
-                src="/images/hero-coastal.jpg"
+                src={IMG.heroCoastal}
                 alt="Brand visual — coastal"
                 fill
                 className="object-cover object-center hover:scale-[1.04] transition-transform duration-[1400ms] ease-out"
@@ -175,7 +177,7 @@ export default function AboutPage() {
             <Reveal>
               <div className="relative w-full aspect-square overflow-hidden">
                 <BrandImage
-                  src="/images/fabric-texture.jpg"
+                  src={IMG.fabricTexture}
                   alt="Brand visual — fabric"
                   fill
                   className="object-cover object-center hover:scale-[1.04] transition-transform duration-[1400ms] ease-out"
@@ -186,7 +188,7 @@ export default function AboutPage() {
             <Reveal>
               <div className="relative w-full aspect-square overflow-hidden">
                 <BrandImage
-                  src="/images/product-tee.jpg"
+                  src={IMG.productTee}
                   alt="Brand visual — product"
                   fill
                   className="object-cover object-center hover:scale-[1.04] transition-transform duration-[1400ms] ease-out"

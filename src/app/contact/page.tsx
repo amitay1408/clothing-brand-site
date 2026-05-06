@@ -2,6 +2,8 @@
 
 import { useRef, useState } from "react";
 import BrandImage from "@/components/BrandImage";
+import Container from "@/components/Container";
+import { IMG } from "@/lib/images";
 import { motion, useInView } from "framer-motion";
 
 function Reveal({ children, className = "", delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
@@ -37,7 +39,7 @@ export default function ContactPage() {
       {/* Hero */}
       <section className="relative h-[55vh] min-h-[400px] max-h-[700px] overflow-hidden">
         <BrandImage
-          src="/images/hero-coastal.jpg"
+          src={IMG.heroCoastal}
           alt="Contact — coastal"
           fill
           priority
@@ -215,7 +217,7 @@ export default function ContactPage() {
       {/* Bottom image strip */}
       <section className="relative w-full h-44 md:h-56 overflow-hidden">
         <BrandImage
-          src="/images/editorial-pier.jpg"
+          src={IMG.editorialPier}
           alt="Mediterranean coast"
           fill
           className="object-cover object-[center_60%]"

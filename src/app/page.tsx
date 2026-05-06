@@ -3,6 +3,8 @@
 import { useRef } from "react";
 import Link from "next/link";
 import BrandImage from "@/components/BrandImage";
+import Container from "@/components/Container";
+import { IMG } from "@/lib/images";
 import { motion, useScroll, useTransform, useInView, type Variants } from "framer-motion";
 
 const fadeUp: Variants = {
@@ -33,7 +35,7 @@ export default function HomePage() {
         {/* Parallax image layer */}
         <motion.div className="absolute inset-0 w-full h-full" style={{ y: heroY }}>
           <BrandImage
-            src="/images/hero-coastal.jpg"
+            src={IMG.heroCoastal}
             alt="Mediterranean waterfront at sunset"
             fill
             priority
@@ -118,7 +120,7 @@ export default function HomePage() {
           <Reveal>
             <div className="relative w-full aspect-[3/4] overflow-hidden">
               <BrandImage
-                src="/images/editorial-pier.jpg"
+                src={IMG.editorialPier}
                 alt="Editorial lifestyle — Mediterranean dock"
                 fill
                 className="object-cover object-center transition-transform duration-[1400ms] ease-out hover:scale-[1.04]"
@@ -159,7 +161,7 @@ export default function HomePage() {
             <Reveal>
               <div className="relative w-full aspect-[4/3] overflow-hidden">
                 <BrandImage
-                  src="/images/fabric-texture.jpg"
+                  src={IMG.fabricTexture}
                   alt="Washed fabric texture detail"
                   fill
                   className="object-cover object-center transition-transform duration-[1400ms] ease-out hover:scale-[1.04]"
@@ -186,9 +188,9 @@ export default function HomePage() {
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             {[
-              { img: "/images/product-tee.jpg", label: "Product View", desc: "Heavyweight washed cotton · Enzyme washed · Relaxed fit" },
-              { img: "/images/editorial-pier.jpg", label: "Styled", desc: "Worn along the coast" },
-              { img: "/images/fabric-texture.jpg", label: "Detail", desc: "Fabric & finish" },
+              { img: IMG.productTee, label: "Product View", desc: "Heavyweight washed cotton · Enzyme washed · Relaxed fit" },
+              { img: IMG.editorialPier, label: "Styled", desc: "Worn along the coast" },
+              { img: IMG.fabricTexture, label: "Detail", desc: "Fabric & finish" },
             ].map((item, i) => (
               <Reveal key={i}>
                 <div className="bg-[#ede5d4] group overflow-hidden">
@@ -229,7 +231,7 @@ export default function HomePage() {
             <div className="relative w-full">
               <div className="relative w-full aspect-square overflow-hidden">
                 <BrandImage
-                  src="/images/vintage-family.jpg"
+                  src={IMG.vintageFamily}
                   alt="Archival family photography — 1979"
                   fill
                   className="object-cover object-center"
@@ -277,7 +279,7 @@ export default function HomePage() {
       {/* ── FULL-WIDTH LIFESTYLE ── */}
       <section className="relative w-full h-[65vh] md:h-[80vh] overflow-hidden">
         <BrandImage
-          src="/images/hero-coastal.jpg"
+          src={IMG.heroCoastal}
           alt="Mediterranean coastal lifestyle"
           fill
           className="object-cover object-[center_30%]"
@@ -373,9 +375,9 @@ export default function HomePage() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
-              { category: "Craft", title: "On the art of enzyme washing", excerpt: "How we achieve the perfect sun-faded finish through an ancient Japanese textile technique.", img: "/images/fabric-texture.jpg" },
-              { category: "Place", title: "The Adriatic in October", excerpt: "A quiet week along the Dalmatian coast — the light, the stone, the stillness.", img: "/images/hero-coastal.jpg" },
-              { category: "Archive", title: "Old summers, new garments", excerpt: "How family photographs from the 1970s shaped the visual language of Le Déclin Oublié.", img: "/images/vintage-family.jpg" },
+              { category: "Craft", title: "On the art of enzyme washing", excerpt: "How we achieve the perfect sun-faded finish through an ancient Japanese textile technique.", img: IMG.fabricTexture },
+              { category: "Place", title: "The Adriatic in October", excerpt: "A quiet week along the Dalmatian coast — the light, the stone, the stillness.", img: IMG.heroCoastal },
+              { category: "Archive", title: "Old summers, new garments", excerpt: "How family photographs from the 1970s shaped the visual language of Le Déclin Oublié.", img: IMG.vintageFamily },
             ].map((article, i) => (
               <Reveal key={i}>
                 <Link href="/journal" className="group block">

@@ -3,6 +3,8 @@
 import { useRef, useState } from "react";
 import Link from "next/link";
 import BrandImage from "@/components/BrandImage";
+import Container from "@/components/Container";
+import { IMG } from "@/lib/images";
 import { motion, useInView } from "framer-motion";
 
 function Reveal({ children, delay = 0, className = "" }: { children: React.ReactNode; delay?: number; className?: string }) {
@@ -22,12 +24,12 @@ function Reveal({ children, delay = 0, className = "" }: { children: React.React
 }
 
 const products = [
-  { id: 1, name: "Le Tee — Washed Navy", price: "€185", category: "T-Shirts", tag: "Signature", img: "/images/product-tee.jpg", hoverImg: "/images/editorial-pier.jpg", details: "Heavyweight enzyme-washed cotton · Relaxed fit · Small embroidered logo" },
-  { id: 2, name: "Le Tee — Washed Steel", price: "€185", category: "T-Shirts", tag: null, img: "/images/product-tee.jpg", hoverImg: "/images/fabric-texture.jpg", details: "Heavyweight enzyme-washed cotton · Relaxed fit · 4-stitch side detail" },
-  { id: 3, name: "Le Pantalon — Off-White", price: "€220", category: "Trousers", tag: "New", img: "/images/editorial-pier.jpg", hoverImg: "/images/hero-coastal.jpg", details: "Brushed French terry · Wide-leg · Script embroidery" },
-  { id: 4, name: "Le Crewneck — Washed Navy", price: "€265", category: "Knitwear", tag: null, img: "/images/hero-coastal.jpg", hoverImg: "/images/product-tee.jpg", details: "Garment-dyed heavy fleece · Boxy fit · Faded finish" },
-  { id: 5, name: "Le Jacket — Coastal", price: "€395", category: "Outerwear", tag: "Limited", img: "/images/fabric-texture.jpg", hoverImg: "/images/editorial-pier.jpg", details: "Canvas cotton · Unstructured · Vintage wash treatment" },
-  { id: 6, name: "Le Tee — Archive Grey", price: "€185", category: "T-Shirts", tag: null, img: "/images/hero-coastal.jpg", hoverImg: "/images/fabric-texture.jpg", details: "Heavyweight enzyme-washed cotton · Relaxed fit · Tonal print" },
+  { id: 1, name: "Le Tee — Washed Navy", price: "€185", category: "T-Shirts", tag: "Signature", img: IMG.productTee, hoverImg: IMG.editorialPier, details: "Heavyweight enzyme-washed cotton · Relaxed fit · Small embroidered logo" },
+  { id: 2, name: "Le Tee — Washed Steel", price: "€185", category: "T-Shirts", tag: null, img: IMG.productTee, hoverImg: IMG.fabricTexture, details: "Heavyweight enzyme-washed cotton · Relaxed fit · 4-stitch side detail" },
+  { id: 3, name: "Le Pantalon — Off-White", price: "€220", category: "Trousers", tag: "New", img: IMG.editorialPier, hoverImg: IMG.heroCoastal, details: "Brushed French terry · Wide-leg · Script embroidery" },
+  { id: 4, name: "Le Crewneck — Washed Navy", price: "€265", category: "Knitwear", tag: null, img: IMG.heroCoastal, hoverImg: IMG.productTee, details: "Garment-dyed heavy fleece · Boxy fit · Faded finish" },
+  { id: 5, name: "Le Jacket — Coastal", price: "€395", category: "Outerwear", tag: "Limited", img: IMG.fabricTexture, hoverImg: IMG.editorialPier, details: "Canvas cotton · Unstructured · Vintage wash treatment" },
+  { id: 6, name: "Le Tee — Archive Grey", price: "€185", category: "T-Shirts", tag: null, img: IMG.heroCoastal, hoverImg: IMG.fabricTexture, details: "Heavyweight enzyme-washed cotton · Relaxed fit · Tonal print" },
 ];
 
 const filters = ["All", "T-Shirts", "Trousers", "Knitwear", "Outerwear"];

@@ -3,6 +3,8 @@
 import { useRef } from "react";
 import Link from "next/link";
 import BrandImage from "@/components/BrandImage";
+import Container from "@/components/Container";
+import { IMG } from "@/lib/images";
 import { motion, useInView } from "framer-motion";
 
 function Reveal({ children, className = "", delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
@@ -22,11 +24,11 @@ function Reveal({ children, className = "", delay = 0 }: { children: React.React
 }
 
 const articles = [
-  { id: 1, category: "Craft", title: "On the art of enzyme washing", subtitle: "A slow transformation", excerpt: "How we achieve the perfect sun-faded finish through an ancient Japanese textile technique that strips colour softly, the way time does.", date: "April 2024", readTime: "6 min", img: "/images/fabric-texture.jpg", featured: true },
-  { id: 2, category: "Place", title: "The Adriatic in October", subtitle: "A quiet week on the Dalmatian coast", excerpt: "The light, the stone, the stillness. What we found when we went looking for the soul of the collection.", date: "March 2024", readTime: "8 min", img: "/images/hero-coastal.jpg", featured: false },
-  { id: 3, category: "Archive", title: "Old summers, new garments", subtitle: "How family photographs shaped our visual language", excerpt: "An October afternoon in 1979, five people around a table, the warmth in their fabrics — and how that image became Le Déclin Oublié.", date: "February 2024", readTime: "5 min", img: "/images/vintage-family.jpg", featured: false },
-  { id: 4, category: "Garment", title: "The weight of cotton", subtitle: "Why heavier is better", excerpt: "On the quiet luxury of heavyweight cotton — why fabric weight matters more than price, and what 300gsm actually feels like.", date: "January 2024", readTime: "4 min", img: "/images/product-tee.jpg", featured: false },
-  { id: 5, category: "Culture", title: "The old money summer", subtitle: "On quiet wealth and coastal ease", excerpt: "A meditation on the European summer aesthetic — not the yacht, but the ease. Not the label, but the linen.", date: "December 2023", readTime: "7 min", img: "/images/editorial-pier.jpg", featured: false },
+  { id: 1, category: "Craft", title: "On the art of enzyme washing", subtitle: "A slow transformation", excerpt: "How we achieve the perfect sun-faded finish through an ancient Japanese textile technique that strips colour softly, the way time does.", date: "April 2024", readTime: "6 min", img: IMG.fabricTexture, featured: true },
+  { id: 2, category: "Place", title: "The Adriatic in October", subtitle: "A quiet week on the Dalmatian coast", excerpt: "The light, the stone, the stillness. What we found when we went looking for the soul of the collection.", date: "March 2024", readTime: "8 min", img: IMG.heroCoastal, featured: false },
+  { id: 3, category: "Archive", title: "Old summers, new garments", subtitle: "How family photographs shaped our visual language", excerpt: "An October afternoon in 1979, five people around a table, the warmth in their fabrics — and how that image became Le Déclin Oublié.", date: "February 2024", readTime: "5 min", img: IMG.vintageFamily, featured: false },
+  { id: 4, category: "Garment", title: "The weight of cotton", subtitle: "Why heavier is better", excerpt: "On the quiet luxury of heavyweight cotton — why fabric weight matters more than price, and what 300gsm actually feels like.", date: "January 2024", readTime: "4 min", img: IMG.productTee, featured: false },
+  { id: 5, category: "Culture", title: "The old money summer", subtitle: "On quiet wealth and coastal ease", excerpt: "A meditation on the European summer aesthetic — not the yacht, but the ease. Not the label, but the linen.", date: "December 2023", readTime: "7 min", img: IMG.editorialPier, featured: false },
 ];
 
 export default function JournalPage() {
