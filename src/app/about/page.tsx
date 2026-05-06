@@ -5,14 +5,14 @@ import BrandImage from "@/components/BrandImage";
 import Link from "next/link";
 import { motion, useInView, useScroll, useTransform } from "framer-motion";
 
-function AnimatedSection({ children, className = "" }: { children: React.ReactNode; className?: string }) {
+function Reveal({ children, className = "" }: { children: React.ReactNode; className?: string }) {
   const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-80px" });
+  const inView = useInView(ref, { once: true, margin: "-70px" });
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 35 }}
-      animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 35 }}
+      initial={{ opacity: 0, y: 30 }}
+      animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
       transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
       className={className}
     >
@@ -29,21 +29,21 @@ export default function AboutPage() {
   return (
     <>
       {/* Hero */}
-      <section ref={heroRef} className="relative h-[75vh] min-h-[500px] overflow-hidden">
-        <motion.div className="absolute inset-0" style={{ y: heroY }}>
+      <section ref={heroRef} className="relative h-[72vh] min-h-[480px] max-h-[900px] overflow-hidden">
+        <motion.div className="absolute inset-0 w-full h-full" style={{ y: heroY }}>
           <BrandImage
             src="/images/vintage-family.jpg"
             alt="Brand archival photography"
             fill
             priority
-            className="object-cover object-center sepia-[0.2] brightness-85"
+            className="object-cover object-center brightness-90"
             sizes="100vw"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#1e2c42]/40 via-[#1e2c42]/20 to-[#1e2c42]/60" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#1e2c42]/45 via-[#1e2c42]/20 to-[#1e2c42]/65" />
         </motion.div>
-        <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-6">
+        <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6">
           <motion.p
-            className="text-[#d4c4a0] text-[9px] tracking-[0.35em] uppercase mb-6"
+            className="text-[#d4c4a0] text-[9px] tracking-[0.32em] uppercase mb-5"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.9, delay: 0.3 }}
@@ -53,7 +53,7 @@ export default function AboutPage() {
           <motion.h1
             className="text-[#f5f2ec] text-5xl md:text-7xl lg:text-8xl leading-[1]"
             style={{ fontFamily: "var(--font-cormorant)", fontWeight: 300 }}
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.2, delay: 0.5 }}
           >
@@ -62,26 +62,26 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Opening statement */}
-      <section className="py-20 md:py-32 px-6 md:px-10 max-w-screen-xl mx-auto">
-        <AnimatedSection className="max-w-3xl mx-auto text-center">
+      {/* Opening quote */}
+      <section className="w-full max-w-screen-xl mx-auto px-6 md:px-10 py-16 md:py-24">
+        <Reveal className="max-w-3xl mx-auto text-center">
           <p
-            className="text-3xl md:text-4xl lg:text-5xl text-[#1e2c42] leading-[1.2]"
+            className="text-2xl md:text-3xl lg:text-4xl text-[#1e2c42] leading-[1.25]"
             style={{ fontFamily: "var(--font-cormorant)", fontWeight: 300, fontStyle: "italic" }}
           >
-            "Le Déclin Oublié began not with a sketch, but with a feeling."
+            &ldquo;Le Déclin Oublié began not with a sketch, but with a feeling.&rdquo;
           </p>
-        </AnimatedSection>
+        </Reveal>
       </section>
 
-      <div className="border-t border-[#1e2c42]/8 mx-6 md:mx-10" />
+      <div className="border-t border-[#1e2c42]/10" />
 
       {/* Brand story */}
-      <section className="py-20 md:py-28 px-6 md:px-10 max-w-screen-xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-24 items-start">
-          <AnimatedSection>
+      <section className="w-full max-w-screen-xl mx-auto px-6 md:px-10 py-16 md:py-24">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 items-start">
+          <Reveal>
             <div>
-              <p className="text-[9px] tracking-[0.35em] uppercase text-[#7a8a9a] mb-8">The Origin</p>
+              <p className="text-[9px] tracking-[0.32em] uppercase text-[#7a8a9a] mb-7">The Origin</p>
               <div className="space-y-6 text-[#7a8a9a] text-sm leading-8">
                 <p>
                   It started with a photograph — an image from October 1979 of people gathered around a table on a Mediterranean afternoon. Something in the quality of that light, the ease of those bodies, the warmth of those fabrics, felt like everything fashion had stopped trying to be.
@@ -94,15 +94,15 @@ export default function AboutPage() {
                 </p>
               </div>
             </div>
-          </AnimatedSection>
-          <AnimatedSection>
-            <div className="space-y-6">
-              <div className="relative aspect-[4/5] overflow-hidden">
+          </Reveal>
+          <Reveal>
+            <div>
+              <div className="relative w-full aspect-[4/5] overflow-hidden mb-4">
                 <BrandImage
                   src="/images/vintage-family.jpg"
                   alt="Archival inspiration — 1979"
                   fill
-                  className="object-cover object-center sepia-[0.25] brightness-90"
+                  className="object-cover object-center brightness-90"
                   sizes="(max-width: 768px) 100vw, 50vw"
                 />
               </div>
@@ -110,24 +110,24 @@ export default function AboutPage() {
                 Archive · October 1979
               </p>
             </div>
-          </AnimatedSection>
+          </Reveal>
         </div>
       </section>
 
-      {/* Dark philosophy section */}
-      <section className="bg-[#1e2c42] py-20 md:py-28 px-6 md:px-10">
-        <div className="max-w-screen-xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-16 md:gap-8">
-            <AnimatedSection className="md:col-span-2">
-              <p className="text-[9px] tracking-[0.35em] uppercase text-[#4a6274] mb-8">Our Philosophy</p>
+      {/* Philosophy — dark panel */}
+      <section className="bg-[#1e2c42] py-16 md:py-24">
+        <div className="w-full max-w-screen-xl mx-auto px-6 md:px-10">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-12">
+            <Reveal className="md:col-span-2">
+              <p className="text-[9px] tracking-[0.32em] uppercase text-[#4a6274] mb-7">Our Philosophy</p>
               <h2
-                className="text-4xl md:text-5xl text-[#f5f2ec] mb-8 leading-[1.1]"
+                className="text-4xl md:text-5xl text-[#f5f2ec] mb-7 leading-[1.1]"
                 style={{ fontFamily: "var(--font-cormorant)", fontWeight: 300 }}
               >
                 Quietly expensive.<br />
                 <em>Never loud.</em>
               </h2>
-              <div className="space-y-5 text-[#7a8a9a] text-sm leading-8 max-w-xl">
+              <div className="space-y-5 text-[#7a8a9a] text-sm leading-8 max-w-lg">
                 <p>
                   We make premium essentials for people who don't need to announce themselves. Garments for those who have outgrown the need to be seen, and care instead about how they feel.
                 </p>
@@ -135,9 +135,9 @@ export default function AboutPage() {
                   Every detail — the weight of the cotton, the depth of the wash, the placement of the stitch — is intentional. Not for effect, but for feeling.
                 </p>
               </div>
-            </AnimatedSection>
-            <AnimatedSection>
-              <div className="space-y-6 md:pt-16">
+            </Reveal>
+            <Reveal>
+              <div className="space-y-7 md:pt-14">
                 {[
                   { label: "Fabric", value: "Heavyweight premium cotton" },
                   { label: "Wash", value: "Enzyme & sun-fade treatment" },
@@ -145,53 +145,72 @@ export default function AboutPage() {
                   { label: "Philosophy", value: "Quiet luxury. Zero compromise." },
                 ].map((item) => (
                   <div key={item.label}>
-                    <p className="text-[9px] tracking-[0.25em] uppercase text-[#4a6274] mb-1">{item.label}</p>
+                    <p className="text-[9px] tracking-[0.24em] uppercase text-[#4a6274] mb-1.5">{item.label}</p>
                     <p className="text-[#c8b99a] text-sm">{item.value}</p>
                   </div>
                 ))}
               </div>
-            </AnimatedSection>
+            </Reveal>
           </div>
         </div>
       </section>
 
-      {/* Visual editorial */}
-      <section className="py-20 md:py-28 px-6 md:px-10 max-w-screen-xl mx-auto">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-20">
-          {[
-            { img: "/images/hero-coastal.jpg", span: "col-span-2 row-span-2" },
-            { img: "/images/fabric-texture.jpg", span: "col-span-1" },
-            { img: "/images/product-tee.jpg", span: "col-span-1" },
-            { img: "/images/editorial-pier.jpg", span: "col-span-2" },
-          ].map((item, i) => (
-            <AnimatedSection key={i} className={item.span}>
-              <div className={`relative overflow-hidden ${i === 0 ? "aspect-square md:aspect-auto md:h-full min-h-[280px]" : "aspect-square"}`}>
+      {/* Visual mosaic — simplified 2-col layout that actually works */}
+      <section className="w-full max-w-screen-xl mx-auto px-6 md:px-10 py-16 md:py-24">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10">
+          {/* Left — tall portrait */}
+          <Reveal className="md:row-span-2">
+            <div className="relative w-full aspect-[3/4] md:h-full overflow-hidden" style={{ minHeight: "320px" }}>
+              <BrandImage
+                src="/images/hero-coastal.jpg"
+                alt="Brand visual — coastal"
+                fill
+                className="object-cover object-center hover:scale-[1.04] transition-transform duration-[1400ms] ease-out"
+                sizes="(max-width: 768px) 100vw, 50vw"
+              />
+            </div>
+          </Reveal>
+          {/* Right — two stacked squares */}
+          <div className="flex flex-col gap-4">
+            <Reveal>
+              <div className="relative w-full aspect-square overflow-hidden">
                 <BrandImage
-                  src={item.img}
-                  alt="Brand visual"
+                  src="/images/fabric-texture.jpg"
+                  alt="Brand visual — fabric"
                   fill
-                  className="object-cover object-center hover:scale-105 transition-transform duration-[1400ms] ease-out"
-                  sizes="(max-width: 768px) 50vw, 25vw"
+                  className="object-cover object-center hover:scale-[1.04] transition-transform duration-[1400ms] ease-out"
+                  sizes="(max-width: 768px) 100vw, 50vw"
                 />
               </div>
-            </AnimatedSection>
-          ))}
+            </Reveal>
+            <Reveal>
+              <div className="relative w-full aspect-square overflow-hidden">
+                <BrandImage
+                  src="/images/product-tee.jpg"
+                  alt="Brand visual — product"
+                  fill
+                  className="object-cover object-center hover:scale-[1.04] transition-transform duration-[1400ms] ease-out"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />
+              </div>
+            </Reveal>
+          </div>
         </div>
 
-        <AnimatedSection className="text-center">
+        <Reveal className="text-center pt-4">
           <p
-            className="text-2xl md:text-3xl text-[#1e2c42] mb-10 leading-relaxed"
+            className="text-2xl md:text-3xl text-[#1e2c42] mb-9 leading-[1.3]"
             style={{ fontFamily: "var(--font-cormorant)", fontWeight: 300, fontStyle: "italic" }}
           >
-            "Inspired by summers along the Mediterranean coast."
+            &ldquo;Inspired by summers along the Mediterranean coast.&rdquo;
           </p>
           <Link
             href="/shop"
-            className="inline-flex items-center gap-3 bg-[#1e2c42] text-[#f5f2ec] text-[10px] tracking-[0.25em] uppercase px-10 py-4 hover:bg-[#2a3d56] transition-colors duration-300"
+            className="inline-block bg-[#1e2c42] text-[#f5f2ec] text-[10px] tracking-[0.22em] uppercase px-10 py-4 hover:bg-[#2a3d56] transition-colors duration-300"
           >
             Discover the Garments
           </Link>
-        </AnimatedSection>
+        </Reveal>
       </section>
     </>
   );

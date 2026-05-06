@@ -6,26 +6,15 @@ import BrandImage from "@/components/BrandImage";
 import { motion, useScroll, useTransform, useInView, type Variants } from "framer-motion";
 
 const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 40 },
+  hidden: { opacity: 0, y: 32 },
   visible: { opacity: 1, y: 0, transition: { duration: 1, ease: [0.22, 1, 0.36, 1] } },
 };
 
-const fadeIn = {
-  hidden: { opacity: 0 },
-  visible: { opacity: 1, transition: { duration: 1.2, ease: "easeOut" } },
-};
-
-function AnimatedSection({ children, className = "" }: { children: React.ReactNode; className?: string }) {
+function Reveal({ children, className = "" }: { children: React.ReactNode; className?: string }) {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
   return (
-    <motion.div
-      ref={ref}
-      initial="hidden"
-      animate={inView ? "visible" : "hidden"}
-      variants={fadeUp}
-      className={className}
-    >
+    <motion.div ref={ref} initial="hidden" animate={inView ? "visible" : "hidden"} variants={fadeUp} className={className}>
       {children}
     </motion.div>
   );
@@ -34,272 +23,259 @@ function AnimatedSection({ children, className = "" }: { children: React.ReactNo
 export default function HomePage() {
   const heroRef = useRef(null);
   const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
-  const heroY = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
-  const heroOpacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
+  const heroY = useTransform(scrollYProgress, [0, 1], ["0%", "22%"]);
+  const heroOpacity = useTransform(scrollYProgress, [0, 0.75], [1, 0]);
 
   return (
     <>
-      {/* ── HERO ────────────────────────────────────────── */}
-      <section ref={heroRef} className="relative h-screen min-h-[600px] overflow-hidden">
-        <motion.div className="absolute inset-0" style={{ y: heroY }}>
+      {/* ── HERO ── */}
+      <section ref={heroRef} className="relative h-screen min-h-[600px] max-h-[1000px] overflow-hidden">
+        {/* Parallax image layer */}
+        <motion.div className="absolute inset-0 w-full h-full" style={{ y: heroY }}>
           <BrandImage
             src="/images/hero-coastal.jpg"
-            alt="Man at Mediterranean waterfront at sunset"
+            alt="Mediterranean waterfront at sunset"
             fill
             priority
             className="object-cover object-center"
             sizes="100vw"
           />
-          {/* Cinematic overlay */}
-          <div className="absolute inset-0 bg-gradient-to-b from-[#1e2c42]/20 via-transparent to-[#1e2c42]/55" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#1e2c42]/15 via-transparent to-[#1e2c42]/60" />
         </motion.div>
 
+        {/* Hero text — sits at bottom left */}
         <motion.div
-          className="relative z-10 h-full flex flex-col justify-end pb-20 px-6 md:px-16 max-w-screen-xl mx-auto"
+          className="absolute inset-0 flex flex-col justify-end w-full"
           style={{ opacity: heroOpacity }}
         >
-          <motion.p
-            className="text-[#d4c4a0] text-[10px] tracking-[0.35em] uppercase mb-5"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.3 }}
-          >
-            Spring — Summer Collection
-          </motion.p>
-          <motion.h1
-            className="text-[#f5f2ec] text-5xl md:text-7xl lg:text-8xl leading-[0.95] mb-8 max-w-2xl"
-            style={{ fontFamily: "var(--font-cormorant)", fontWeight: 300 }}
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.2, delay: 0.5 }}
-          >
-            The Forgotten<br />
-            <em>Decline</em>
-          </motion.h1>
-          <motion.div
-            className="flex items-center gap-8"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 1 }}
-          >
-            <Link
-              href="/collections"
-              className="text-[#f5f2ec] text-[10px] tracking-[0.28em] uppercase border-b border-[#f5f2ec]/60 pb-0.5 hover:border-[#f5f2ec] transition-all duration-300"
+          <div className="w-full max-w-screen-xl mx-auto px-6 md:px-10 pb-16 md:pb-24">
+            <motion.p
+              className="text-[#d4c4a0] text-[10px] tracking-[0.3em] uppercase mb-4"
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.9, delay: 0.4 }}
             >
-              Discover the Collection
-            </Link>
-            <span className="text-[#7a8a9a] text-[10px] tracking-[0.2em] uppercase hidden md:block">
-              ↓ Scroll
-            </span>
-          </motion.div>
+              Spring — Summer Collection
+            </motion.p>
+            <motion.h1
+              className="text-[#f5f2ec] text-5xl sm:text-6xl md:text-7xl lg:text-8xl leading-[1] mb-8 max-w-2xl"
+              style={{ fontFamily: "var(--font-cormorant)", fontWeight: 300 }}
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1.1, delay: 0.55 }}
+            >
+              The Forgotten<br />
+              <em>Decline</em>
+            </motion.h1>
+            <motion.div
+              className="flex items-center gap-8"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.9, delay: 1.0 }}
+            >
+              <Link
+                href="/collections"
+                className="text-[#f5f2ec] text-[10px] tracking-[0.26em] uppercase border-b border-[#f5f2ec]/50 pb-0.5 hover:border-[#f5f2ec] transition-all duration-300"
+              >
+                Discover the Collection
+              </Link>
+            </motion.div>
+          </div>
         </motion.div>
 
-        {/* Scroll indicator */}
+        {/* Animated scroll line */}
         <motion.div
-          className="absolute bottom-8 right-8 md:right-16 z-10 flex flex-col items-center gap-3"
+          className="absolute bottom-8 right-8 md:right-12 z-10"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 1.5 }}
+          transition={{ delay: 1.6 }}
         >
           <motion.div
-            className="w-px h-12 bg-[#f5f2ec]/40"
+            className="w-px h-10 bg-[#f5f2ec]/35 mx-auto"
             animate={{ scaleY: [1, 0.3, 1] }}
-            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+            transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
             style={{ transformOrigin: "top" }}
           />
         </motion.div>
       </section>
 
-      {/* ── PHILOSOPHY STRIP ─────────────────────────────── */}
-      <section className="bg-[#1e2c42] py-6">
-        <div className="max-w-screen-xl mx-auto px-6 md:px-10 flex items-center justify-center">
+      {/* ── PHILOSOPHY STRIP ── */}
+      <div className="bg-[#1e2c42] py-5">
+        <div className="w-full max-w-screen-xl mx-auto px-6 md:px-10 text-center">
           <p
-            className="text-[#d4c4a0] text-sm md:text-base tracking-[0.12em] text-center"
+            className="text-[#d4c4a0] text-sm md:text-base tracking-[0.1em]"
             style={{ fontFamily: "var(--font-cormorant)", fontStyle: "italic", fontWeight: 300 }}
           >
             &ldquo;Garments shaped by time, salt, and sunlight.&rdquo;
           </p>
         </div>
-      </section>
+      </div>
 
-      {/* ── FEATURED EDITORIAL ───────────────────────────── */}
-      <section className="py-24 md:py-36 px-6 md:px-10 max-w-screen-xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 items-start">
-          {/* Left — large image */}
-          <AnimatedSection>
-            <div className="relative aspect-[3/4] overflow-hidden">
+      {/* ── FEATURED EDITORIAL ── */}
+      <section className="w-full max-w-screen-xl mx-auto px-6 md:px-10 py-20 md:py-32">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 items-start">
+          {/* Left — portrait image */}
+          <Reveal>
+            <div className="relative w-full aspect-[3/4] overflow-hidden">
               <BrandImage
                 src="/images/editorial-pier.jpg"
-                alt="Editorial lifestyle photography — Mediterranean dock"
+                alt="Editorial lifestyle — Mediterranean dock"
                 fill
-                className="object-cover object-center transition-transform duration-[1400ms] ease-out hover:scale-105"
+                className="object-cover object-center transition-transform duration-[1400ms] ease-out hover:scale-[1.04]"
                 sizes="(max-width: 768px) 100vw, 50vw"
               />
             </div>
-          </AnimatedSection>
+          </Reveal>
 
           {/* Right — text + small image */}
-          <div className="flex flex-col justify-between gap-8 md:pt-20">
-            <AnimatedSection>
+          <div className="flex flex-col justify-between gap-10 md:pt-16">
+            <Reveal>
               <div>
-                <p className="text-[9px] tracking-[0.3em] uppercase text-[#7a8a9a] mb-6">
-                  SS — 2024 · Collection No. 01
+                <p className="text-[9px] tracking-[0.28em] uppercase text-[#7a8a9a] mb-5">
+                  SS 2024 · Collection No. 01
                 </p>
                 <h2
-                  className="text-4xl md:text-5xl lg:text-6xl leading-[1.05] text-[#1e2c42] mb-8"
+                  className="text-4xl md:text-5xl lg:text-[3.25rem] leading-[1.06] text-[#1e2c42] mb-6"
                   style={{ fontFamily: "var(--font-cormorant)", fontWeight: 300 }}
                 >
                   Washed by<br />
                   <em>the Adriatic</em>
                 </h2>
-                <p className="text-[#7a8a9a] text-sm leading-7 max-w-sm mb-10">
+                <p className="text-[#7a8a9a] text-sm leading-7 max-w-xs mb-9">
                   Each piece carries the memory of a slower season — sun-faded cotton, soft from salt air, worn with quiet confidence along old stone quays.
                 </p>
                 <Link
                   href="/collections"
-                  className="inline-flex items-center gap-3 text-[10px] tracking-[0.25em] uppercase text-[#1e2c42] group"
+                  className="inline-flex items-center gap-2 text-[10px] tracking-[0.24em] uppercase text-[#1e2c42] group"
                 >
-                  <span className="border-b border-[#1e2c42]/40 pb-0.5 group-hover:border-[#1e2c42] transition-colors duration-300">
+                  <span className="border-b border-[#1e2c42]/35 pb-0.5 group-hover:border-[#1e2c42] transition-colors duration-300">
                     View Collection
                   </span>
-                  <span className="group-hover:translate-x-1 transition-transform duration-300">→</span>
+                  <span className="group-hover:translate-x-1 transition-transform duration-300 text-xs">→</span>
                 </Link>
               </div>
-            </AnimatedSection>
+            </Reveal>
 
-            <AnimatedSection>
-              <div className="relative aspect-[4/3] overflow-hidden">
+            <Reveal>
+              <div className="relative w-full aspect-[4/3] overflow-hidden">
                 <BrandImage
                   src="/images/fabric-texture.jpg"
                   alt="Washed fabric texture detail"
                   fill
-                  className="object-cover object-center transition-transform duration-[1400ms] ease-out hover:scale-105"
-                  sizes="(max-width: 768px) 100vw, 40vw"
+                  className="object-cover object-center transition-transform duration-[1400ms] ease-out hover:scale-[1.04]"
+                  sizes="(max-width: 768px) 100vw, 42vw"
                 />
               </div>
-            </AnimatedSection>
+            </Reveal>
           </div>
         </div>
       </section>
 
-      {/* ── PRODUCT HIGHLIGHT ────────────────────────────── */}
-      <section className="bg-[#f0ebe0] py-24 md:py-36">
-        <div className="max-w-screen-xl mx-auto px-6 md:px-10">
-          <AnimatedSection className="text-center mb-16">
-            <p className="text-[9px] tracking-[0.35em] uppercase text-[#7a8a9a] mb-4">The Signature Piece</p>
+      {/* ── PRODUCT HIGHLIGHT ── */}
+      <section className="bg-[#f0ebe0] py-20 md:py-32">
+        <div className="w-full max-w-screen-xl mx-auto px-6 md:px-10">
+          <Reveal className="text-center mb-14">
+            <p className="text-[9px] tracking-[0.32em] uppercase text-[#7a8a9a] mb-3">The Signature Piece</p>
             <h2
               className="text-4xl md:text-5xl text-[#1e2c42]"
               style={{ fontFamily: "var(--font-cormorant)", fontWeight: 300 }}
             >
               Le Tee — Washed Navy
             </h2>
-          </AnimatedSection>
+          </Reveal>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-[#d4c4a0]/30">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             {[
-              {
-                img: "/images/product-tee.jpg",
-                label: "Product View",
-                desc: "Heavyweight washed cotton · Enzyme washed · Relaxed fit",
-                wide: true,
-              },
-              {
-                img: "/images/editorial-pier.jpg",
-                label: "Styled",
-                desc: "Worn along the coast",
-                wide: false,
-              },
-              {
-                img: "/images/fabric-texture.jpg",
-                label: "Detail",
-                desc: "Fabric & finish",
-                wide: false,
-              },
+              { img: "/images/product-tee.jpg", label: "Product View", desc: "Heavyweight washed cotton · Enzyme washed · Relaxed fit" },
+              { img: "/images/editorial-pier.jpg", label: "Styled", desc: "Worn along the coast" },
+              { img: "/images/fabric-texture.jpg", label: "Detail", desc: "Fabric & finish" },
             ].map((item, i) => (
-              <AnimatedSection key={i}>
-                <div className="relative overflow-hidden bg-[#ede5d4] group">
-                  <div className={`relative ${item.wide ? "aspect-[3/4]" : "aspect-[3/4]"} overflow-hidden`}>
+              <Reveal key={i}>
+                <div className="bg-[#ede5d4] group overflow-hidden">
+                  <div className="relative w-full aspect-[3/4] overflow-hidden">
                     <BrandImage
                       src={item.img}
                       alt={item.label}
                       fill
-                      className="object-cover object-center transition-transform duration-[1200ms] ease-out group-hover:scale-103"
-                      sizes="(max-width: 768px) 100vw, 33vw"
+                      className="object-cover object-center transition-transform duration-[1200ms] ease-out group-hover:scale-[1.04]"
+                      sizes="(max-width: 640px) 100vw, 33vw"
                     />
                   </div>
-                  <div className="p-5">
-                    <p className="text-[9px] tracking-[0.25em] uppercase text-[#7a8a9a] mb-1">{item.label}</p>
-                    <p className="text-[11px] text-[#1e2c42]/70">{item.desc}</p>
+                  <div className="p-4 md:p-5">
+                    <p className="text-[9px] tracking-[0.24em] uppercase text-[#7a8a9a] mb-1">{item.label}</p>
+                    <p className="text-[11px] text-[#1e2c42]/65 leading-5">{item.desc}</p>
                   </div>
                 </div>
-              </AnimatedSection>
+              </Reveal>
             ))}
           </div>
 
-          <AnimatedSection className="text-center mt-14">
+          <Reveal className="text-center mt-12">
             <Link
               href="/shop"
-              className="inline-flex items-center gap-4 bg-[#1e2c42] text-[#f5f2ec] text-[10px] tracking-[0.28em] uppercase px-10 py-4 hover:bg-[#2a3d56] transition-colors duration-400"
+              className="inline-block bg-[#1e2c42] text-[#f5f2ec] text-[10px] tracking-[0.26em] uppercase px-10 py-4 hover:bg-[#2a3d56] transition-colors duration-300"
             >
               Shop Now
             </Link>
-          </AnimatedSection>
+          </Reveal>
         </div>
       </section>
 
-      {/* ── ARCHIVAL SECTION ─────────────────────────────── */}
-      <section className="py-24 md:py-36 px-6 md:px-10 max-w-screen-xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-24 items-center">
-          <AnimatedSection>
-            <div className="relative">
-              <div className="relative aspect-square overflow-hidden">
+      {/* ── ARCHIVAL SECTION ── */}
+      <section className="w-full max-w-screen-xl mx-auto px-6 md:px-10 py-20 md:py-32">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 items-center">
+          {/* Archive image with label badge */}
+          <Reveal>
+            <div className="relative w-full">
+              <div className="relative w-full aspect-square overflow-hidden">
                 <BrandImage
                   src="/images/vintage-family.jpg"
                   alt="Archival family photography — 1979"
                   fill
-                  className="object-cover object-center sepia-[0.2] brightness-90"
+                  className="object-cover object-center"
                   sizes="(max-width: 768px) 100vw, 50vw"
                 />
               </div>
-              <div className="absolute -bottom-4 -right-4 md:-bottom-6 md:-right-6 bg-[#1e2c42] text-[#d4c4a0] px-5 py-3">
-                <p className="text-[9px] tracking-[0.25em] uppercase">Archive · MCMLXXIX</p>
+              {/* Badge — inside the image container so it never overflows */}
+              <div className="absolute bottom-4 right-4 bg-[#1e2c42] text-[#d4c4a0] px-4 py-2">
+                <p className="text-[9px] tracking-[0.22em] uppercase">Archive · MCMLXXIX</p>
               </div>
             </div>
-          </AnimatedSection>
+          </Reveal>
 
-          <AnimatedSection>
+          <Reveal>
             <div>
-              <p className="text-[9px] tracking-[0.35em] uppercase text-[#7a8a9a] mb-8">The Inspiration</p>
+              <p className="text-[9px] tracking-[0.32em] uppercase text-[#7a8a9a] mb-7">The Inspiration</p>
               <h2
-                className="text-4xl md:text-5xl lg:text-6xl leading-[1.08] text-[#1e2c42] mb-8"
+                className="text-4xl md:text-5xl lg:text-[3.25rem] leading-[1.08] text-[#1e2c42] mb-6"
                 style={{ fontFamily: "var(--font-cormorant)", fontWeight: 300 }}
               >
                 Rooted in<br />
                 <em>memory</em>
               </h2>
-              <div className="w-12 h-px bg-[#c8b99a] mb-8" />
-              <p className="text-[#7a8a9a] text-sm leading-8 mb-6">
+              <div className="w-10 h-px bg-[#c8b99a] mb-7" />
+              <p className="text-[#7a8a9a] text-sm leading-8 mb-5">
                 Le Déclin Oublié began not with a sketch, but with a feeling — the particular quality of afternoon light on a Mediterranean terrace. The smell of salt in old linen. The way time moves differently near the sea.
               </p>
-              <p className="text-[#7a8a9a] text-sm leading-8 mb-10">
+              <p className="text-[#7a8a9a] text-sm leading-8 mb-9">
                 Our garments carry that feeling forward. Not as nostalgia, but as a quiet understanding of what endures.
               </p>
               <Link
                 href="/about"
-                className="inline-flex items-center gap-3 text-[10px] tracking-[0.25em] uppercase text-[#1e2c42] group"
+                className="inline-flex items-center gap-2 text-[10px] tracking-[0.24em] uppercase text-[#1e2c42] group"
               >
-                <span className="border-b border-[#1e2c42]/40 pb-0.5 group-hover:border-[#1e2c42] transition-colors duration-300">
+                <span className="border-b border-[#1e2c42]/35 pb-0.5 group-hover:border-[#1e2c42] transition-colors duration-300">
                   Our Story
                 </span>
-                <span className="group-hover:translate-x-1 transition-transform duration-300">→</span>
+                <span className="group-hover:translate-x-1 transition-transform duration-300 text-xs">→</span>
               </Link>
             </div>
-          </AnimatedSection>
+          </Reveal>
         </div>
       </section>
 
-      {/* ── FULL WIDTH LIFESTYLE ─────────────────────────── */}
-      <section className="relative h-[70vh] md:h-[85vh] overflow-hidden">
+      {/* ── FULL-WIDTH LIFESTYLE ── */}
+      <section className="relative w-full h-[65vh] md:h-[80vh] overflow-hidden">
         <BrandImage
           src="/images/hero-coastal.jpg"
           alt="Mediterranean coastal lifestyle"
@@ -307,13 +283,13 @@ export default function HomePage() {
           className="object-cover object-[center_30%]"
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#1e2c42]/60 via-[#1e2c42]/20 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#1e2c42]/65 via-[#1e2c42]/25 to-transparent" />
         <div className="absolute inset-0 flex items-center">
-          <div className="max-w-screen-xl mx-auto px-6 md:px-16 w-full">
-            <AnimatedSection>
-              <p className="text-[#d4c4a0] text-[10px] tracking-[0.3em] uppercase mb-6">Quiet Luxury</p>
+          <div className="w-full max-w-screen-xl mx-auto px-6 md:px-10">
+            <Reveal>
+              <p className="text-[#d4c4a0] text-[10px] tracking-[0.28em] uppercase mb-5">Quiet Luxury</p>
               <h2
-                className="text-[#f5f2ec] text-4xl md:text-6xl lg:text-7xl leading-[1.05] max-w-xl mb-10"
+                className="text-[#f5f2ec] text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.06] max-w-lg mb-9"
                 style={{ fontFamily: "var(--font-cormorant)", fontWeight: 300 }}
               >
                 Made for<br />
@@ -321,18 +297,18 @@ export default function HomePage() {
               </h2>
               <Link
                 href="/shop"
-                className="inline-flex items-center gap-3 text-[#f5f2ec] text-[10px] tracking-[0.28em] uppercase border-b border-[#f5f2ec]/50 pb-0.5 hover:border-[#f5f2ec] transition-all duration-300"
+                className="inline-block text-[#f5f2ec] text-[10px] tracking-[0.26em] uppercase border-b border-[#f5f2ec]/45 pb-0.5 hover:border-[#f5f2ec] transition-all duration-300"
               >
                 Shop the Collection
               </Link>
-            </AnimatedSection>
+            </Reveal>
           </div>
         </div>
       </section>
 
-      {/* ── BRAND PILLARS ────────────────────────────────── */}
-      <section className="py-24 md:py-32 px-6 md:px-10 max-w-screen-xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-[#1e2c42]/8">
+      {/* ── BRAND PILLARS ── */}
+      <section className="w-full max-w-screen-xl mx-auto px-6 md:px-10 py-20 md:py-28">
+        <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-[#1e2c42]/10">
           {[
             {
               number: "I",
@@ -350,127 +326,114 @@ export default function HomePage() {
               text: "No seasonal trends. No hype. Garments designed to last decades — in quality, in feeling, in memory.",
             },
           ].map((pillar, i) => (
-            <AnimatedSection key={i}>
-              <div className="bg-[#f5f2ec] p-10 md:p-14 h-full">
+            <Reveal key={i}>
+              <div className="py-10 md:py-0 md:px-10 first:md:pl-0 last:md:pr-0">
                 <p
-                  className="text-[#d4c4a0] text-3xl mb-6"
+                  className="text-[#d4c4a0] text-3xl mb-5"
                   style={{ fontFamily: "var(--font-cormorant)", fontStyle: "italic" }}
                 >
                   {pillar.number}
                 </p>
                 <h3
-                  className="text-xl md:text-2xl text-[#1e2c42] mb-5"
+                  className="text-xl md:text-2xl text-[#1e2c42] mb-4"
                   style={{ fontFamily: "var(--font-cormorant)", fontWeight: 400 }}
                 >
                   {pillar.title}
                 </h3>
-                <div className="w-8 h-px bg-[#c8b99a] mb-5" />
+                <div className="w-8 h-px bg-[#c8b99a] mb-4" />
                 <p className="text-[#7a8a9a] text-sm leading-7">{pillar.text}</p>
               </div>
-            </AnimatedSection>
+            </Reveal>
           ))}
         </div>
       </section>
 
-      {/* ── JOURNAL PREVIEW ──────────────────────────────── */}
-      <section className="bg-[#1e2c42] py-24 md:py-32 px-6 md:px-10">
-        <div className="max-w-screen-xl mx-auto">
-          <AnimatedSection className="flex items-end justify-between mb-14">
-            <div>
-              <p className="text-[9px] tracking-[0.35em] uppercase text-[#4a6274] mb-3">The Journal</p>
-              <h2
-                className="text-4xl md:text-5xl text-[#f5f2ec]"
-                style={{ fontFamily: "var(--font-cormorant)", fontWeight: 300 }}
+      {/* ── JOURNAL PREVIEW ── */}
+      <section className="bg-[#1e2c42] py-20 md:py-28">
+        <div className="w-full max-w-screen-xl mx-auto px-6 md:px-10">
+          <Reveal>
+            <div className="flex items-end justify-between mb-12">
+              <div>
+                <p className="text-[9px] tracking-[0.32em] uppercase text-[#4a6274] mb-3">The Journal</p>
+                <h2
+                  className="text-4xl md:text-5xl text-[#f5f2ec]"
+                  style={{ fontFamily: "var(--font-cormorant)", fontWeight: 300 }}
+                >
+                  Stories from the coast
+                </h2>
+              </div>
+              <Link
+                href="/journal"
+                className="hidden md:inline-block text-[10px] tracking-[0.2em] uppercase text-[#7a8a9a] hover:text-[#c8b99a] transition-colors duration-300"
               >
-                Stories from the coast
-              </h2>
+                All Articles →
+              </Link>
             </div>
-            <Link
-              href="/journal"
-              className="hidden md:flex items-center gap-3 text-[10px] tracking-[0.22em] uppercase text-[#7a8a9a] hover:text-[#c8b99a] transition-colors duration-300"
-            >
-              All Articles →
-            </Link>
-          </AnimatedSection>
+          </Reveal>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
-              {
-                category: "Craft",
-                title: "On the art of enzyme washing",
-                excerpt: "How we achieve the perfect sun-faded finish through an ancient Japanese textile technique.",
-                img: "/images/fabric-texture.jpg",
-              },
-              {
-                category: "Place",
-                title: "The Adriatic in October",
-                excerpt: "A quiet week along the Dalmatian coast — the light, the stone, the stillness.",
-                img: "/images/hero-coastal.jpg",
-              },
-              {
-                category: "Archive",
-                title: "Old summers, new garments",
-                excerpt: "How family photographs from the 1970s shaped the visual language of Le Déclin Oublié.",
-                img: "/images/vintage-family.jpg",
-              },
+              { category: "Craft", title: "On the art of enzyme washing", excerpt: "How we achieve the perfect sun-faded finish through an ancient Japanese textile technique.", img: "/images/fabric-texture.jpg" },
+              { category: "Place", title: "The Adriatic in October", excerpt: "A quiet week along the Dalmatian coast — the light, the stone, the stillness.", img: "/images/hero-coastal.jpg" },
+              { category: "Archive", title: "Old summers, new garments", excerpt: "How family photographs from the 1970s shaped the visual language of Le Déclin Oublié.", img: "/images/vintage-family.jpg" },
             ].map((article, i) => (
-              <AnimatedSection key={i}>
+              <Reveal key={i}>
                 <Link href="/journal" className="group block">
-                  <div className="relative aspect-[4/3] overflow-hidden mb-5">
+                  <div className="relative w-full aspect-[4/3] overflow-hidden mb-5">
                     <BrandImage
                       src={article.img}
                       alt={article.title}
                       fill
-                      className="object-cover object-center transition-transform duration-[1200ms] ease-out group-hover:scale-105"
+                      className="object-cover object-center transition-transform duration-[1200ms] ease-out group-hover:scale-[1.05]"
                       sizes="(max-width: 768px) 100vw, 33vw"
                     />
                   </div>
-                  <p className="text-[9px] tracking-[0.3em] uppercase text-[#4a6274] mb-2">{article.category}</p>
+                  <p className="text-[9px] tracking-[0.28em] uppercase text-[#4a6274] mb-2">{article.category}</p>
                   <h3
-                    className="text-xl text-[#f5f2ec] mb-3 group-hover:text-[#d4c4a0] transition-colors duration-300"
+                    className="text-xl text-[#f5f2ec] mb-2 group-hover:text-[#d4c4a0] transition-colors duration-300 leading-snug"
                     style={{ fontFamily: "var(--font-cormorant)", fontWeight: 400 }}
                   >
                     {article.title}
                   </h3>
                   <p className="text-[#7a8a9a] text-xs leading-6">{article.excerpt}</p>
                 </Link>
-              </AnimatedSection>
+              </Reveal>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── NEWSLETTER ───────────────────────────────────── */}
-      <section className="py-24 md:py-32 px-6 md:px-10 bg-[#f0ebe0]">
-        <div className="max-w-screen-xl mx-auto text-center">
-          <AnimatedSection>
-            <p className="text-[9px] tracking-[0.35em] uppercase text-[#7a8a9a] mb-4">Stay close</p>
+      {/* ── NEWSLETTER ── */}
+      <section className="bg-[#f0ebe0] py-20 md:py-28">
+        <div className="w-full max-w-screen-xl mx-auto px-6 md:px-10 text-center">
+          <Reveal>
+            <p className="text-[9px] tracking-[0.32em] uppercase text-[#7a8a9a] mb-3">Stay close</p>
             <h2
-              className="text-4xl md:text-5xl text-[#1e2c42] mb-5"
+              className="text-4xl md:text-5xl text-[#1e2c42] mb-4"
               style={{ fontFamily: "var(--font-cormorant)", fontWeight: 300 }}
             >
               Quiet letters from the coast
             </h2>
-            <p className="text-[#7a8a9a] text-sm mb-10 max-w-md mx-auto leading-7">
+            <p className="text-[#7a8a9a] text-sm mb-9 max-w-sm mx-auto leading-7">
               Occasional dispatches — new collections, journal entries, and fragments of the world that inspires us.
             </p>
             <form
-              className="flex flex-col sm:flex-row gap-0 max-w-md mx-auto"
+              className="flex flex-col sm:flex-row max-w-md mx-auto"
               onSubmit={(e) => e.preventDefault()}
             >
               <input
                 type="email"
                 placeholder="Your email address"
-                className="flex-1 bg-transparent border border-[#1e2c42]/20 px-5 py-3.5 text-xs tracking-[0.12em] text-[#1e2c42] placeholder:text-[#7a8a9a] focus:outline-none focus:border-[#1e2c42]/50 transition-colors"
+                className="flex-1 min-w-0 bg-transparent border border-[#1e2c42]/20 px-5 py-3.5 text-xs tracking-[0.1em] text-[#1e2c42] placeholder:text-[#7a8a9a] focus:outline-none focus:border-[#1e2c42]/50 transition-colors"
               />
               <button
                 type="submit"
-                className="bg-[#1e2c42] text-[#f5f2ec] px-8 py-3.5 text-[10px] tracking-[0.22em] uppercase hover:bg-[#2a3d56] transition-colors duration-300 whitespace-nowrap"
+                className="bg-[#1e2c42] text-[#f5f2ec] px-8 py-3.5 text-[10px] tracking-[0.2em] uppercase hover:bg-[#2a3d56] transition-colors duration-300 whitespace-nowrap"
               >
                 Subscribe
               </button>
             </form>
-          </AnimatedSection>
+          </Reveal>
         </div>
       </section>
     </>

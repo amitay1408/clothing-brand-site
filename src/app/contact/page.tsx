@@ -4,14 +4,14 @@ import { useRef, useState } from "react";
 import BrandImage from "@/components/BrandImage";
 import { motion, useInView } from "framer-motion";
 
-function AnimatedSection({ children, className = "", delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
+function Reveal({ children, className = "", delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-60px" });
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 30 }}
-      animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+      initial={{ opacity: 0, y: 24 }}
+      animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
       transition={{ duration: 0.9, delay, ease: [0.22, 1, 0.36, 1] }}
       className={className}
     >
@@ -30,12 +30,12 @@ export default function ContactPage() {
   };
 
   const inputClass =
-    "w-full bg-transparent border-b border-[#1e2c42]/20 py-3.5 text-sm text-[#1e2c42] placeholder:text-[#7a8a9a] focus:outline-none focus:border-[#1e2c42]/60 transition-colors duration-300 tracking-[0.04em]";
+    "w-full bg-transparent border-b border-[#1e2c42]/20 py-3 text-sm text-[#1e2c42] placeholder:text-[#b0a899] focus:outline-none focus:border-[#1e2c42]/55 transition-colors duration-300";
 
   return (
     <>
       {/* Hero */}
-      <section className="relative h-[55vh] min-h-[420px] overflow-hidden">
+      <section className="relative h-[55vh] min-h-[400px] max-h-[700px] overflow-hidden">
         <BrandImage
           src="/images/hero-coastal.jpg"
           alt="Contact — coastal"
@@ -44,10 +44,10 @@ export default function ContactPage() {
           className="object-cover object-[center_40%]"
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#1e2c42]/40 to-[#1e2c42]/60" />
-        <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-6">
+        <div className="absolute inset-0 bg-gradient-to-b from-[#1e2c42]/40 via-[#1e2c42]/30 to-[#1e2c42]/65" />
+        <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6">
           <motion.p
-            className="text-[#d4c4a0] text-[9px] tracking-[0.35em] uppercase mb-5"
+            className="text-[#d4c4a0] text-[9px] tracking-[0.32em] uppercase mb-5"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.9, delay: 0.3 }}
@@ -57,7 +57,7 @@ export default function ContactPage() {
           <motion.h1
             className="text-[#f5f2ec] text-5xl md:text-7xl"
             style={{ fontFamily: "var(--font-cormorant)", fontWeight: 300 }}
-            initial={{ opacity: 0, y: 25 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.1, delay: 0.5 }}
           >
@@ -66,58 +66,47 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* Contact section */}
-      <section className="py-20 md:py-32 px-6 md:px-10 max-w-screen-xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-24">
-          {/* Left — Info */}
-          <AnimatedSection>
+      {/* Main contact section */}
+      <section className="w-full max-w-screen-xl mx-auto px-6 md:px-10 py-16 md:py-28">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-14 md:gap-20 lg:gap-28">
+
+          {/* Left — contact info */}
+          <Reveal>
             <div>
-              <p className="text-[9px] tracking-[0.35em] uppercase text-[#7a8a9a] mb-8">Get in touch</p>
+              <p className="text-[9px] tracking-[0.32em] uppercase text-[#7a8a9a] mb-7">Get in touch</p>
               <h2
-                className="text-4xl md:text-5xl text-[#1e2c42] mb-8 leading-[1.1]"
+                className="text-4xl md:text-5xl text-[#1e2c42] mb-7 leading-[1.1]"
                 style={{ fontFamily: "var(--font-cormorant)", fontWeight: 300 }}
               >
                 Quiet conversations<br />
                 <em>welcome</em>
               </h2>
-              <p className="text-[#7a8a9a] text-sm leading-8 mb-12 max-w-sm">
-                Whether it's about a garment, an order, a collaboration, or simply to say hello — we read everything and respond with care.
+              <p className="text-[#7a8a9a] text-sm leading-8 mb-10 max-w-xs">
+                Whether it&rsquo;s about a garment, an order, a collaboration, or simply to say hello — we read everything and respond with care.
               </p>
 
-              <div className="space-y-8">
+              <div className="space-y-7 mb-10">
                 {[
-                  {
-                    label: "Customer Care",
-                    value: "contact@ledeclinoublie.com",
-                    sub: "We respond within 24–48 hours",
-                  },
-                  {
-                    label: "Press & Editorial",
-                    value: "press@ledeclinoublie.com",
-                    sub: "Media & collaboration enquiries",
-                  },
-                  {
-                    label: "Wholesale",
-                    value: "wholesale@ledeclinoublie.com",
-                    sub: "Stockist & retail partnerships",
-                  },
+                  { label: "Customer Care", value: "contact@ledeclinoublie.com", sub: "We respond within 24–48 hours" },
+                  { label: "Press & Editorial", value: "press@ledeclinoublie.com", sub: "Media & collaboration enquiries" },
+                  { label: "Wholesale", value: "wholesale@ledeclinoublie.com", sub: "Stockist & retail partnerships" },
                 ].map((item) => (
                   <div key={item.label}>
-                    <p className="text-[9px] tracking-[0.28em] uppercase text-[#7a8a9a] mb-1.5">{item.label}</p>
+                    <p className="text-[9px] tracking-[0.26em] uppercase text-[#7a8a9a] mb-1.5">{item.label}</p>
                     <p className="text-sm text-[#1e2c42] mb-0.5">{item.value}</p>
                     <p className="text-xs text-[#7a8a9a]">{item.sub}</p>
                   </div>
                 ))}
               </div>
 
-              <div className="mt-12 pt-8 border-t border-[#1e2c42]/10">
-                <p className="text-[9px] tracking-[0.28em] uppercase text-[#7a8a9a] mb-4">Follow</p>
+              <div className="pt-7 border-t border-[#1e2c42]/10">
+                <p className="text-[9px] tracking-[0.26em] uppercase text-[#7a8a9a] mb-4">Follow</p>
                 <div className="flex gap-6">
                   {["Instagram", "Pinterest"].map((social) => (
                     <a
                       key={social}
                       href="#"
-                      className="text-[10px] tracking-[0.18em] uppercase text-[#1e2c42]/60 hover:text-[#1e2c42] transition-colors duration-300"
+                      className="text-[10px] tracking-[0.16em] uppercase text-[#1e2c42]/50 hover:text-[#1e2c42] transition-colors duration-300"
                     >
                       {social}
                     </a>
@@ -125,33 +114,34 @@ export default function ContactPage() {
                 </div>
               </div>
             </div>
-          </AnimatedSection>
+          </Reveal>
 
-          {/* Right — Form */}
-          <AnimatedSection delay={0.1}>
+          {/* Right — form or success */}
+          <Reveal delay={0.1}>
             {sent ? (
-              <div className="flex flex-col items-center justify-center h-full text-center py-20">
+              <div className="flex flex-col justify-center py-16 md:py-24">
                 <motion.div
-                  initial={{ opacity: 0, scale: 0.9 }}
+                  initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.6 }}
                 >
                   <p
-                    className="text-3xl text-[#1e2c42] mb-4"
+                    className="text-3xl md:text-4xl text-[#1e2c42] mb-5"
                     style={{ fontFamily: "var(--font-cormorant)", fontWeight: 300 }}
                   >
                     Message received.
                   </p>
-                  <p className="text-[#7a8a9a] text-sm leading-7 max-w-xs mx-auto">
-                    Thank you for reaching out. We'll respond within 24–48 hours with the same care you've written with.
+                  <div className="w-10 h-px bg-[#c8b99a] mb-5" />
+                  <p className="text-[#7a8a9a] text-sm leading-7 max-w-xs">
+                    Thank you for reaching out. We&rsquo;ll respond within 24–48 hours with the same care you&rsquo;ve written with.
                   </p>
                 </motion.div>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-8">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+              <form onSubmit={handleSubmit} className="space-y-7">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-7">
                   <div>
-                    <label className="block text-[9px] tracking-[0.28em] uppercase text-[#7a8a9a] mb-3">
+                    <label className="block text-[9px] tracking-[0.26em] uppercase text-[#7a8a9a] mb-3">
                       Your name
                     </label>
                     <input
@@ -164,7 +154,7 @@ export default function ContactPage() {
                     />
                   </div>
                   <div>
-                    <label className="block text-[9px] tracking-[0.28em] uppercase text-[#7a8a9a] mb-3">
+                    <label className="block text-[9px] tracking-[0.26em] uppercase text-[#7a8a9a] mb-3">
                       Email address
                     </label>
                     <input
@@ -179,11 +169,11 @@ export default function ContactPage() {
                 </div>
 
                 <div>
-                  <label className="block text-[9px] tracking-[0.28em] uppercase text-[#7a8a9a] mb-3">
+                  <label className="block text-[9px] tracking-[0.26em] uppercase text-[#7a8a9a] mb-3">
                     Subject
                   </label>
                   <select
-                    className={`${inputClass} cursor-pointer`}
+                    className={`${inputClass} cursor-pointer bg-[#f5f2ec]`}
                     value={form.subject}
                     onChange={(e) => setForm({ ...form, subject: e.target.value })}
                   >
@@ -197,7 +187,7 @@ export default function ContactPage() {
                 </div>
 
                 <div>
-                  <label className="block text-[9px] tracking-[0.28em] uppercase text-[#7a8a9a] mb-3">
+                  <label className="block text-[9px] tracking-[0.26em] uppercase text-[#7a8a9a] mb-3">
                     Your message
                   </label>
                   <textarea
@@ -212,18 +202,18 @@ export default function ContactPage() {
 
                 <button
                   type="submit"
-                  className="w-full bg-[#1e2c42] text-[#f5f2ec] text-[10px] tracking-[0.28em] uppercase py-4 hover:bg-[#2a3d56] transition-colors duration-300"
+                  className="w-full bg-[#1e2c42] text-[#f5f2ec] text-[10px] tracking-[0.26em] uppercase py-4 hover:bg-[#2a3d56] transition-colors duration-300"
                 >
                   Send Message
                 </button>
               </form>
             )}
-          </AnimatedSection>
+          </Reveal>
         </div>
       </section>
 
       {/* Bottom image strip */}
-      <section className="relative h-48 md:h-64 overflow-hidden">
+      <section className="relative w-full h-44 md:h-56 overflow-hidden">
         <BrandImage
           src="/images/editorial-pier.jpg"
           alt="Mediterranean coast"
@@ -231,10 +221,10 @@ export default function ContactPage() {
           className="object-cover object-[center_60%]"
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-[#1e2c42]/40" />
-        <div className="absolute inset-0 flex items-center justify-center">
+        <div className="absolute inset-0 bg-[#1e2c42]/45" />
+        <div className="absolute inset-0 flex items-center justify-center px-6">
           <p
-            className="text-[#f5f2ec]/80 text-sm md:text-base tracking-[0.18em] text-center"
+            className="text-[#f5f2ec]/75 text-base md:text-lg tracking-[0.12em] text-center"
             style={{ fontFamily: "var(--font-cormorant)", fontStyle: "italic" }}
           >
             Quiet pieces for slower moments.
